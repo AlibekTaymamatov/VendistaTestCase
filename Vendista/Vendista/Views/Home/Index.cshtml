@@ -1,0 +1,81 @@
+﻿@using Vendista.Models;
+@model List<CommandType>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Vendista</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <div class="logo"> VENDISTA</div>
+        <div class="title">Личный кабинет - Отправка команды на терминал</div>
+    </header>
+    <div class="panel">
+        <a href=""> Клиенты</a>
+        <a href="">Пользователи</a>
+        <a href="">Терминалы</a>
+        <a href="">TID Банка</a>
+        <a href="">Транзакции</a>
+        <a href="">Логи терминалов</a>
+        <a href="">Кассы</a>
+        <a href="">Привязать терминалы к клиенту списком</a>
+    </div>
+    <div class="main">
+        <br><p>Отправка команды на терминал</p><br>
+        <div class="content">
+            <table>
+                <tr>
+                    <td>ID Терминала(ов)</td>
+                    <td style="padding-left: 20px;"> Команда</td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea rows="10" cols="20" id="terminalId" style="resize: none;"></textarea>
+                    </td>
+                    <td style="padding-left: 20px; vertical-align: top;">
+                        <div>
+                            <select style="width: 20em;"  id="idcom" onchange="selectCommand(this)">
+                                @foreach (CommandType item in Model)
+                                {
+                                    <option value="@item.Id" style="color: gray;">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <span id="messageError" style="color: red; display: none;">Ошибка: </span>
+            <br>
+            <div id="selectDiv"></div>
+            <table id="tbl_params">
+            </table>
+            <br>
+            <button class="btn1 back">Назад</button>
+            <button class="btn1 send" onclick="sendCommand()">Отправить</button>
+            <br><br>
+        </div>
+        <br>
+        <table class="table">
+            <thead style="background-color: #4b4b4b; color: white;">
+                <tr>
+                    <th>№</th>
+                    <th>Дата и время</th>
+                    <th>Команда</th>
+                    <th>Параметр 1</th>
+                    <th>Параметр 2</th>
+                    <th>Параметр 3</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody id="historyCommand">
+            </tbody>
+        </table>
+    </div>
+    <script src="/js/site.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</body>
+</html>
